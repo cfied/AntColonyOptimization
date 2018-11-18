@@ -1,6 +1,6 @@
 //walls 1,49,99,49-1,51,99,51
 //walls only food & nest 1,24,49,24-1,26,49,26-18,25,18,25-21,25,21,25
-
+//Test
 package main;
 
 import main.misc.Configuration;
