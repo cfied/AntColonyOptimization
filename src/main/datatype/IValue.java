@@ -18,6 +18,11 @@ public class IValue {
         this.assimilate();
     }
     
+    public Boolean isZero(){
+    	return(this.d == 0.0);
+    }
+    
+    
     //Division by a double
     public IValue div(double x) {  
         

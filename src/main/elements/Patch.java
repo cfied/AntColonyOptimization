@@ -37,7 +37,7 @@ public class Patch {
     }
     
     public void setFeed() {
-    	this.feed = 5;
+    	this.feed = 50;
     }
     
     public void setFeed(int i) {
@@ -102,9 +102,9 @@ public class Patch {
             return Mode.NEST;
         } else if(this.feed>0) {
             return Mode.FEED;
-        } else if(this.pFeed.isHigher(new IValue(0.0, 0))) {
+        } else if(!getFeedIntensity().isZero()) {
             return Mode.FEED_PHEROMON;
-        } else if(this.pNest.isHigher(new IValue(0.0, 0))) {
+        } else if(!getNestIntensity().isZero()) {
             return Mode.NEST_PHEROMON;   
         } else {
             return Mode.NOTHING;

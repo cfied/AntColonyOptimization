@@ -53,9 +53,10 @@ public class Movement extends Thread {
             if(ant.back) {
             	if(ant.checkObject(Mode.NEST) != null) {
             		//change intensity before the move
-            		ant.intensity = new IValue(1.0, 50);
+            		//check if changes need to be made to pickup food
             		ant.move(ant.checkObject(Mode.NEST));
             		ant.back = false;
+            		ant.intensity = new IValue(1.0, 50);
             		continue;
             	}
             	pheromonMove();
@@ -63,9 +64,9 @@ public class Movement extends Thread {
             } else {
             	
             	if(ant.checkObject(Mode.FEED)!= null){
-            		ant.intensity = new IValue(1.0, 50);
             		ant.move(ant.checkObject(Mode.FEED));
             		ant.back = true;
+            		ant.intensity = new IValue(1.0, 50);
             		continue;
             	}
             	pheromonMove();   
@@ -144,8 +145,46 @@ public class Movement extends Thread {
     		Direction d_ = Direction.parse((ant.direction.ordinal() + dirBiggest) % 4);
     		ant.move(d_);
 
-    	} else {        	
+    	} else {   
+    		
     		IValue i0 = ant.getNearIntensity(ant.direction, Mode.FEED_PHEROMON); 
+    		IValue i1 = ant.getNearIntensity(Direction.parse((ant.direction.ordinal() + 1) % 4), Mode.FEED_PHEROMON); 
+    		IValue i2 = ant.getNearIntensity(Direction.parse((ant.direction.ordinal() + 2) % 4), Mode.FEED_PHEROMON); 
+    		IValue i3 = ant.getNearIntensity(Direction.parse((ant.direction.ordinal() + 3) % 4), Mode.FEED_PHEROMON); 
+
+    		IValue biggest = i0;
+    		int dirBiggest = 0;
+    		int counter = 0;
+    		
+    		IValue[] array = {i0,i1,i2,i3};
+    		
+    		for(int i = 0; i < array.length; i++) {
+    			if(array[i].getDouble() == 0.0) {
+    				counter++;
+    			}
+    			if(array[i].isHigher(biggest)) {
+    				biggest = array[i];
+    				dirBiggest = i;
+    			}
+    		}
+    		
+    		if(counter == 4) {
+    			randomMove(50,70,75);
+    			counter = 0;
+    			return;
+    		}
+    		
+    		counter = 0;
+    		
+
+    		Direction d_ = Direction.parse((ant.direction.ordinal() + dirBiggest) % 4);
+    		ant.move(d_);
+    		
+    		
+    		
+    		
+    		
+    		/*IValue i0 = ant.getNearIntensity(ant.direction, Mode.FEED_PHEROMON); 
     		IValue i1 = ant.getNearIntensity(Direction.parse((ant.direction.ordinal() + 1) % 4), Mode.FEED_PHEROMON); 
     		IValue i2 = ant.getNearIntensity(Direction.parse((ant.direction.ordinal() + 2) % 4), Mode.FEED_PHEROMON); 
     		IValue i3 = ant.getNearIntensity(Direction.parse((ant.direction.ordinal() + 3) % 4), Mode.FEED_PHEROMON); 
@@ -176,7 +215,7 @@ public class Movement extends Thread {
     		
             set.clear();
             randomMove((int) Math.round(((i0.frac(i_)).parseToDouble())*100), (int) Math.round(((i1.frac(i_)).parseToDouble())*100), (int) Math.round(((i2.frac(i_)).parseToDouble())*100));
-        }
+        */}
     }
     
     

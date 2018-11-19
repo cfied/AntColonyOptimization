@@ -115,18 +115,18 @@ public class Ant {
         switch(m) {
             case FEED:
                 field[x][y].setFeedIntensity(field[x][y].getFeedIntensity().add(getIntensity())); //here too I guess
-                if(!field[x+1][y].isWall()) { field[x+1][y].setFeedIntensity(field[x+1][y].getFeedIntensity().add(IValue.div(intensity, 20))); }
-                if(!field[x-1][y].isWall()) { field[x-1][y].setFeedIntensity(field[x-1][y].getFeedIntensity().add(IValue.div(intensity, 20))); }
-                if(!field[x][y+1].isWall()) { field[x][y+1].setFeedIntensity(field[x][y+1].getFeedIntensity().add(IValue.div(intensity, 20))); }
-                if(!field[x][y-1].isWall()) { field[x][y-1].setFeedIntensity(field[x][y-1].getFeedIntensity().add(IValue.div(intensity, 20))); }
+                if(!field[x+1][y].isWall()) { field[x+1][y].setFeedIntensity(field[x+1][y].getFeedIntensity().add(IValue.div(getIntensity(), 20))); }
+                if(!field[x-1][y].isWall()) { field[x-1][y].setFeedIntensity(field[x-1][y].getFeedIntensity().add(IValue.div(getIntensity(), 20))); }
+                if(!field[x][y+1].isWall()) { field[x][y+1].setFeedIntensity(field[x][y+1].getFeedIntensity().add(IValue.div(getIntensity(), 20))); }
+                if(!field[x][y-1].isWall()) { field[x][y-1].setFeedIntensity(field[x][y-1].getFeedIntensity().add(IValue.div(getIntensity(), 20))); }
                 break;
                 
             case NEST:
                 field[x][y].setNestIntensity(field[x][y].getNestIntensity().add(getIntensity())); //here the intensity is divided by 10 !!!
-                if(!field[x+1][y].isWall()) { field[x+1][y].setNestIntensity(field[x+1][y].getNestIntensity().add(IValue.div(intensity, 20))); } 
-                if(!field[x-1][y].isWall()) { field[x-1][y].setNestIntensity(field[x-1][y].getNestIntensity().add(IValue.div(intensity, 20))); }
-                if(!field[x][y+1].isWall()) { field[x][y+1].setNestIntensity(field[x][y+1].getNestIntensity().add(IValue.div(intensity, 20))); }
-                if(!field[x][y-1].isWall()) { field[x][y-1].setNestIntensity(field[x][y-1].getNestIntensity().add(IValue.div(intensity, 20))); }
+                if(!field[x+1][y].isWall()) { field[x+1][y].setNestIntensity(field[x+1][y].getNestIntensity().add(IValue.div(getIntensity(), 20))); } 
+                if(!field[x-1][y].isWall()) { field[x-1][y].setNestIntensity(field[x-1][y].getNestIntensity().add(IValue.div(getIntensity(), 20))); }
+                if(!field[x][y+1].isWall()) { field[x][y+1].setNestIntensity(field[x][y+1].getNestIntensity().add(IValue.div(getIntensity(), 20))); }
+                if(!field[x][y-1].isWall()) { field[x][y-1].setNestIntensity(field[x][y-1].getNestIntensity().add(IValue.div(getIntensity(), 20))); }
                 break;
              
 		default:

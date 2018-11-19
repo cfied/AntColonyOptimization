@@ -38,15 +38,15 @@ public class Configuration {
 				
 				output = new FileOutputStream("ants.properties");
 				
-				prop.setProperty("WORLD_HEIGHT", "200");
-				prop.setProperty("WORLD_LENGTH", "200");
+				prop.setProperty("WORLD_HEIGHT", "100");
+				prop.setProperty("WORLD_LENGTH", "100");
 				prop.setProperty("NUMBER_OF_ANTS", "10");
 				
 				prop.setProperty("NEST", "20,20");
 				prop.setProperty("FEED", "80,80,82,82");
 				
 				prop.setProperty("WALLS", "");
-				prop.setProperty("PATCH_SIZE", "8");
+				prop.setProperty("PATCH_SIZE", "10");
 				prop.setProperty("DEBUG", "0");
 				
 				prop.store(output, null);

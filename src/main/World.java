@@ -240,11 +240,6 @@ public class World extends JFrame {
         createWall(0,this.h-1,this.l-1,this.h-1);
         
         this.interpretWallConfiguration(Configuration.WALLS);
-        //test wall
-        //createWall(0,101,150,101);
-        //createWall(0,99,150,99);
-       // createWall(0,110,150,110);
-        //createWall(0,90,150,90);
 
         this.interpretFeedConfiguration(Configuration.FEED);
         this.interpretNestConfiguration(Configuration.NEST);
@@ -254,29 +249,29 @@ public class World extends JFrame {
         
     public void createObject(int x1, int y1, int x2, int y2, Mode m){
         
-        int xLinks;
-        int xRechts;
-        int yUnten;
-        int yOben; 
+        int xL;
+        int xR;
+        int yB;
+        int yT; 
         
         if(x1>x2){
-           xLinks = x2; 
-           xRechts = x1;
+           xL = x2; 
+           xR = x1;
         }else{
-           xLinks = x1; 
-           xRechts = x2; 
+           xL = x1; 
+           xR = x2; 
         }
         
         if(y1>y2){
-           yUnten = y2; 
-           yOben = y1;
+           yB = y2; 
+           yT = y1;
         }else{
-           yUnten = y1; 
-           yOben = y2; 
+           yB = y1; 
+           yT = y2; 
         }
            
-        for(int i = xLinks; i<=xRechts;i++){
-           for(int o = yUnten; o<=yOben;o++){
+        for(int i = xL; i<=xR;i++){
+           for(int o = yB; o<=yT;o++){
                switch(m) {
                    case WALL:
                        this.field[i][o].setWall(true);
