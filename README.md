@@ -1,5 +1,5 @@
 # AntColonyOptimization
-The project models a ant colony that finds the shortest way between their nest and a food source.
+The project models an ant colony that finds the shortest way between their nest and a food source.
 
 ## Manual
 ### Changing properties
