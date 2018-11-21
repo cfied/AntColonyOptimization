@@ -151,7 +151,7 @@ public class IValue {
     	this.assimilate();
     	c.assimilate();
     	
-        if(this.i > c.i) {
+        if(this.i > c.i || c.d == 0) {
             return true;
         } else if(this.i < c.i) {
             return false;

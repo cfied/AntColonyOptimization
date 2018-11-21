@@ -38,14 +38,8 @@ public class Ant {
     
     protected void move(Direction d) {
     	this.intensity.assimilate();
-    	if((this.intensity.getDouble()==0.0)&&(first==true)) {
-    		System.out.println(this.moves);
-    		first = false;
-    		
-    	}
     	
         boolean success = false;
-        //System.out.println(d.toString());
         switch(d) {
             case SOUTH:
                 if(!field[this.x][this.y+1].isWall()) {
@@ -78,13 +72,8 @@ public class Ant {
         }
         
         if(success) {
-        	//commented out to test IValue - essential part of the program
         	this.intensity.div(4);
             this.intensity.assimilate();
-            System.out.println(this.intensity.toString());
-            if(this.intensity.getDouble() < 1.0){
-            	System.out.println("Faulty intensity");
-            }
             field[x][y].addAnt();
             this.direction = d;            
             this.moves++;
@@ -108,13 +97,13 @@ public class Ant {
             	p.setFeed(p.getFeed() - 1);
             }
         }
-        System.out.print("");
+
     }
     
     private void handleIntensity(Mode m) {
         switch(m) {
             case FEED:
-                field[x][y].setFeedIntensity(field[x][y].getFeedIntensity().add(getIntensity())); //here too I guess
+                field[x][y].setFeedIntensity(field[x][y].getFeedIntensity().add(getIntensity())); 
                 if(!field[x+1][y].isWall()) { field[x+1][y].setFeedIntensity(field[x+1][y].getFeedIntensity().add(IValue.div(getIntensity(), 20))); }
                 if(!field[x-1][y].isWall()) { field[x-1][y].setFeedIntensity(field[x-1][y].getFeedIntensity().add(IValue.div(getIntensity(), 20))); }
                 if(!field[x][y+1].isWall()) { field[x][y+1].setFeedIntensity(field[x][y+1].getFeedIntensity().add(IValue.div(getIntensity(), 20))); }
@@ -122,7 +111,7 @@ public class Ant {
                 break;
                 
             case NEST:
-                field[x][y].setNestIntensity(field[x][y].getNestIntensity().add(getIntensity())); //here the intensity is divided by 10 !!!
+                field[x][y].setNestIntensity(field[x][y].getNestIntensity().add(getIntensity())); 
                 if(!field[x+1][y].isWall()) { field[x+1][y].setNestIntensity(field[x+1][y].getNestIntensity().add(IValue.div(getIntensity(), 20))); } 
                 if(!field[x-1][y].isWall()) { field[x-1][y].setNestIntensity(field[x-1][y].getNestIntensity().add(IValue.div(getIntensity(), 20))); }
                 if(!field[x][y+1].isWall()) { field[x][y+1].setNestIntensity(field[x][y+1].getNestIntensity().add(IValue.div(getIntensity(), 20))); }

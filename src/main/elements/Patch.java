@@ -1,6 +1,5 @@
 package main.elements;
 
-import main.Main;
 import main.datatype.IValue;
 import main.enums.Mode;
 

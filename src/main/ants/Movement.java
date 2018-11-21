@@ -86,8 +86,7 @@ public class Movement extends Thread {
     }
     
     private void randomMove(int d1, int d2, int d3) {
-        //for test purpose always go in one direction
-    	//ant.move(ant.direction);
+
         int rand = rnd.nextInt(100)+1;
         //System.out.println(rand);            
         if(rand<=d1){
