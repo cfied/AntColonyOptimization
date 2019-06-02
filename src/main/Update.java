@@ -44,18 +44,8 @@ public class Update implements Runnable{
                     Color c = Color.GRAY;
                     
                     //zeitliche Abnahme
-                    /*pFeed = p.getFeedIntensity();
-                    if(pFeed.isHigher(new IValue(2.0, 0))){
-                        p.setFeedIntensity(pFeed.sub(new IValue(0.0, 0)));
-                    } else {
-                    	pFeed.set(0.0, 0);
-                    }
-                    pNest = p.getNestIntensity();
-                    if(pNest.isHigher(new IValue(2.0,0))){
-                    	p.setNestIntensity(pNest.sub(new IValue(0.0, 0)));;
-                    } else {
-                    	pNest.set(0.0, 0);
-                    }*/
+                    //p.setFeedIntensity(p.getFeedIntensity().div(1.5));
+                                     
                     
                     switch(m){
                         case ANT: 

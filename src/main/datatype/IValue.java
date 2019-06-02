@@ -22,6 +22,9 @@ public class IValue {
     	return(this.d == 0.0);
     }
     
+    public IValue getValues(){
+    	return new IValue(this.d,this.i);
+    }
     
     //Division by a double
     public IValue div(double x) {  
@@ -36,6 +39,7 @@ public class IValue {
     	
     	this.d = d/x;
     	//if the result of that division is smaller than 1, we change i and d until we have a more convenient representation
+    	//not necessary if we keep assimilate...
         while(d < 1 && d > 0.0) {
             this.d = this.d * 10;
             i--;
@@ -44,6 +48,21 @@ public class IValue {
         return this;
     }
     
+    //Multiplication with a double
+    public IValue mult(double x) {  
+        
+    	this.assimilate();
+    	if(x<0.0) {
+    		System.out.println("Multiplying with negative value");
+    	}
+    	
+    	this.d = d*x;
+
+        this.assimilate();
+        return this;
+    }
+    
+    
     //IValue Addition
     public IValue add(IValue v) {
     	IValue max, min;
@@ -51,8 +70,7 @@ public class IValue {
     	this.assimilate();
     	v.assimilate();
     	
-    	//Determine which IValue has the bigger i
-    	if(this.i >= v.i) {
+    	if(this.isHigher(v)) {
     		max = this;
     		min = v;
     	}else{
@@ -97,9 +115,9 @@ public class IValue {
     	return this;
     }
     
-    
+    //currently not used
     // IValue Multiplication: adding is (as e.g (10^2) * (10^1) = 10^(2+1), multiplying ds
-    public IValue mult(IValue v) {
+   /* public IValue mult(IValue v) {
     	
     	this.assimilate();
     	v.assimilate();
@@ -108,7 +126,7 @@ public class IValue {
     	this.d = this.d * v.d;
     	this.assimilate();
     	return this;
-    }
+    }*/
     
     // IValue Division: analogous to Multiplication
     public IValue frac(IValue v) {
@@ -151,7 +169,7 @@ public class IValue {
     	this.assimilate();
     	c.assimilate();
     	
-        if(this.i > c.i || c.d == 0) {
+        if((this.i > c.i && this.d != 0.0) || c.d == 0.0) {
             return true;
         } else if(this.i < c.i) {
             return false;
@@ -175,21 +193,21 @@ public class IValue {
     }
     
     public double parseToDouble() {
-    	IValue v = this;
-    	while(v.i != 0) {
+
+    	while(this.i != 0) {
     		
     		if(i > 0) {
     			if(d == Double.MAX_VALUE || i == Integer.MIN_VALUE){ break;}
-    			v.d = v.d / 10;
-    			v.i--;
+    			this.d = this.d * 10;
+    			this.i--;
     		} else {
     			if(d == Double.MIN_VALUE || i == Integer.MAX_VALUE){ break;}
-    			v.d = v.d * 10;
-    			v.i++;
+    			this.d = this.d / 10;
+    			this.i++;
     		}
     	}
     	
-    	return v.d; 
+    	return this.d; 
     }
     
     //Division by a double

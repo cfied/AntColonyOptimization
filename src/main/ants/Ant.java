@@ -28,7 +28,7 @@ public class Ant {
         this.x = x;
         this.y = y;
         this.direction = d;
-        this.intensity = new IValue(1.0, 50);
+        this.intensity = new IValue(1.0, 100);
         this.moves = 0;
         this.intensity.assimilate();
        
@@ -101,26 +101,48 @@ public class Ant {
     }
     
     private void handleIntensity(Mode m) {
-        switch(m) {
+        //synchronization on each patch while reading and writing
+    	switch(m) {
             case FEED:
-                field[x][y].setFeedIntensity(field[x][y].getFeedIntensity().add(getIntensity())); 
-                if(!field[x+1][y].isWall()) { field[x+1][y].setFeedIntensity(field[x+1][y].getFeedIntensity().add(IValue.div(getIntensity(), 20))); }
-                if(!field[x-1][y].isWall()) { field[x-1][y].setFeedIntensity(field[x-1][y].getFeedIntensity().add(IValue.div(getIntensity(), 20))); }
-                if(!field[x][y+1].isWall()) { field[x][y+1].setFeedIntensity(field[x][y+1].getFeedIntensity().add(IValue.div(getIntensity(), 20))); }
-                if(!field[x][y-1].isWall()) { field[x][y-1].setFeedIntensity(field[x][y-1].getFeedIntensity().add(IValue.div(getIntensity(), 20))); }
-                break;
+            	synchronized(field[x][y]){
+	                field[x][y].setFeedIntensity(field[x][y].getFeedIntensity().add(getIntensity())); 
+            	}
+            	synchronized(field[x+1][y]){
+            		if(!field[x+1][y].isWall()) { field[x+1][y].setFeedIntensity(field[x+1][y].getFeedIntensity().add(IValue.div(getIntensity(), 20))); }
+            	}
+            	synchronized(field[x-1][y]){
+            		if(!field[x-1][y].isWall()) { field[x-1][y].setFeedIntensity(field[x-1][y].getFeedIntensity().add(IValue.div(getIntensity(), 20))); }
+            	}
+            	synchronized(field[x][y+1]){   
+            		if(!field[x][y+1].isWall()) { field[x][y+1].setFeedIntensity(field[x][y+1].getFeedIntensity().add(IValue.div(getIntensity(), 20))); }
+            	}
+            	synchronized(field[x][y-1]){
+            		if(!field[x][y-1].isWall()) { field[x][y-1].setFeedIntensity(field[x][y-1].getFeedIntensity().add(IValue.div(getIntensity(), 20))); }
+            	}
+            	break;
                 
             case NEST:
-                field[x][y].setNestIntensity(field[x][y].getNestIntensity().add(getIntensity())); 
-                if(!field[x+1][y].isWall()) { field[x+1][y].setNestIntensity(field[x+1][y].getNestIntensity().add(IValue.div(getIntensity(), 20))); } 
-                if(!field[x-1][y].isWall()) { field[x-1][y].setNestIntensity(field[x-1][y].getNestIntensity().add(IValue.div(getIntensity(), 20))); }
-                if(!field[x][y+1].isWall()) { field[x][y+1].setNestIntensity(field[x][y+1].getNestIntensity().add(IValue.div(getIntensity(), 20))); }
-                if(!field[x][y-1].isWall()) { field[x][y-1].setNestIntensity(field[x][y-1].getNestIntensity().add(IValue.div(getIntensity(), 20))); }
-                break;
+            	synchronized(field[x][y]){
+	                field[x][y].setNestIntensity(field[x][y].getNestIntensity().add(getIntensity())); 
+            	}
+            	synchronized(field[x+1][y]){
+            		if(!field[x+1][y].isWall()) { field[x+1][y].setNestIntensity(field[x+1][y].getNestIntensity().add(IValue.div(getIntensity(), 20))); }
+            	}
+            	synchronized(field[x-1][y]){
+            		if(!field[x-1][y].isWall()) { field[x-1][y].setNestIntensity(field[x-1][y].getNestIntensity().add(IValue.div(getIntensity(), 20))); }
+            	}
+            	synchronized(field[x][y+1]){   
+            		if(!field[x][y+1].isWall()) { field[x][y+1].setNestIntensity(field[x][y+1].getNestIntensity().add(IValue.div(getIntensity(), 20))); }
+            	}
+            	synchronized(field[x][y-1]){
+            		if(!field[x][y-1].isWall()) { field[x][y-1].setNestIntensity(field[x][y-1].getNestIntensity().add(IValue.div(getIntensity(), 20))); }
+            	}
+            	break;
              
 		default:
 			break;
         }
+	
     }
     
     protected Direction checkObject(Mode m) {
@@ -203,28 +225,52 @@ public class Ant {
         }
     }
     
-    protected IValue getNearIntensity(Direction d, Mode m) {
+    protected IValue getNearIntensity(Direction d, Mode m) throws Exception{
         switch(m) {
             case FEED_PHEROMON:
                 switch(d) {
                     case SOUTH:
+                    	if(field[this.x][this.y+1].isWall()){
+                    		throw new Exception();
+                    	}
                         return field[this.x][this.y+1].getFeedIntensity();
                     case EAST:
+                    	if(field[this.x+1][this.y].isWall()){
+                    		throw new Exception();
+                    	}
                         return field[this.x+1][this.y].getFeedIntensity();
                     case NORTH:
+                    	if(field[this.x][this.y-1].isWall()){
+                    		throw new Exception();
+                    	}
                         return field[this.x][this.y-1].getFeedIntensity();
                     case WEST:
+                    	if(field[this.x-1][this.y].isWall()){
+                    		throw new Exception();
+                    	}
                         return field[this.x-1][this.y].getFeedIntensity();
                 }
             case NEST_PHEROMON:
                 switch(d) {
                     case SOUTH:
+                    	if(field[this.x][this.y+1].isWall()){
+                    		throw new Exception();
+                    	}
                         return field[this.x][this.y+1].getNestIntensity();
                     case EAST:
+                    	if(field[this.x+1][this.y].isWall()){
+                    		throw new Exception();
+                    	}
                         return field[this.x+1][this.y].getNestIntensity();
                     case NORTH:
+                    	if(field[this.x][this.y-1].isWall()){
+                    		throw new Exception();
+                    	}
                         return field[this.x][this.y-1].getNestIntensity();
                     case WEST:
+                    	if(field[this.x-1][this.y].isWall()){
+                    		throw new Exception();
+                    	}
                         return field[this.x-1][this.y].getNestIntensity();
                 }
             default:

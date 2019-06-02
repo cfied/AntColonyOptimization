@@ -36,7 +36,7 @@ public class Patch {
     }
     
     public void setFeed() {
-    	this.feed = 50;
+    	this.feed = 5000;
     }
     
     public void setFeed(int i) {
@@ -54,19 +54,20 @@ public class Patch {
         return this.wall;
     }
     
-    public void setNestIntensity(IValue intensity) {
+    //setters not synchronized as ants handleintensity method is synchronized
+    public synchronized void setNestIntensity(IValue intensity) {
         this.pNest = intensity;
     }
     
-    public void setFeedIntensity(IValue intensity) {
+    public synchronized void setFeedIntensity(IValue intensity) {
         this.pFeed = intensity; 
     }
     
-    public IValue getFeedIntensity() {
+    public synchronized IValue getFeedIntensity() {
         return new IValue(pFeed.getDouble(),pFeed.getInteger());
     }
     
-    public IValue getNestIntensity() {
+    public synchronized IValue getNestIntensity() {
         return new IValue(pNest.getDouble(),pNest.getInteger());
     }
     

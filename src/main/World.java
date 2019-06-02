@@ -26,8 +26,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 
 public class World extends JFrame {
     
@@ -173,52 +171,7 @@ public class World extends JFrame {
         	
         });
         
-        this.addWindowListener(new WindowListener() {
 
-			@Override
-			public void windowActivated(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowClosed(WindowEvent e) {
-			
-			}
-
-			@Override
-			public void windowClosing(WindowEvent e) {
-				/*if(e.getSource() == this) {
-					Movement.bf.close();
-				}*/
-				
-			}
-
-			@Override
-			public void windowDeactivated(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowDeiconified(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowIconified(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowOpened(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-        	
-        });
                  
         //Frame setting
         getContentPane().setPreferredSize(new Dimension(l * Configuration.PATCH_SIZE,h * Configuration.PATCH_SIZE));
